@@ -1,6 +1,6 @@
 require 'httparty'
 
-# Problem 1
+# # Problem 1
 def prob1
     # get request
     response = HTTParty.get('https://api.github.com/users/obsidianmd/repos')
@@ -18,8 +18,6 @@ def prob1
     puts "Num of stars: #{highest['stargazers_count']}"
     puts "URL: #{highest['html_url']}"
 end
-
-# puts prob1
 
 # Problem 2
 def prob2
@@ -43,4 +41,24 @@ def prob2
     end
 end
 
+# Problem 3
+def prob3
+    # get request
+    response = HTTParty.get('http://worldtimeapi.org/api/timezone/America/Chicago')
+
+    #parsing response
+    data = JSON.parse(response.body)
+
+    # • Output: Display the specified area and location, the current date, 
+    # and the time, ensuring to format the output for readability (e.g., "The current time in Europe/London is 2023-09-15 14:30:25").
+    # for readability
+    date = data['datetime'].split('T')[0]
+    time = data['datetime'].split('T')[1].split('.')[0]
+    # print
+    puts "The current time in #{data['timezone']} is #{date} #{time}"
+end
+
+# testing
+puts prob1
 puts prob2
+puts prob3
